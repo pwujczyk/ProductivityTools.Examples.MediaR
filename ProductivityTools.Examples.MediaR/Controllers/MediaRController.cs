@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProductivityTools.Examples.MediaR.Notification;
 using ProductivityTools.Examples.MediaR.RequestResponse;
 
 namespace ProductivityTools.Examples.MediaR.Controllers
@@ -29,6 +30,13 @@ namespace ProductivityTools.Examples.MediaR.Controllers
         {
             var response = await Mediator.Send(new Ping());
             return response;
+        }
+
+        [HttpGet("Notify")]
+        public string Notify()
+        {
+            Mediator.Publish(new Notify()).ConfigureAwait(false);
+            return "s";
         }
     }
 }
